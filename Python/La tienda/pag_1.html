@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #BBD5ED;
+        }
+        .item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #564787;
+            color: whitesmoke;
+        }
+        .currency-selector {
+            margin: 20px 0;
+        }
+        #total {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        h1{
+            background-color: #A288E3;
+            border-radius: 10px;
+            height: 45px;
+            width: auto;
+            color: white;
+            text-align: center;
+            cursor: default;
+        }
+        .bn632-hover {
+          width: 140px;
+          font-size: 16px;
+          font-weight: 600;
+          color: #fff;
+          cursor: pointer;
+          margin: 20px;
+          height: 55px;
+          text-align: center;
+          border: none;
+          background-size: 300% 100%;
+          border-radius: 50px;
+          -o-transition: all 0.4s ease-in-out;
+          -webkit-transition: all 0.4s ease-in-out;
+          transition: all 0.4s ease-in-out;
+        }
+
+        .bn632-hover:hover {
+          background-position: 100% 0;
+          -moz-transition: all .4s ease-in-out;
+          -o-transition: all .4s ease-in-out;
+          -webkit-transition: all .4s ease-in-out;
+          transition: all .4s ease-in-out;
+        }
+
+        .bn632-hover:focus {
+          outline: none;
+        }
+
+        .bn632-hover.bn24 {
+          background-image: linear-gradient(
+              to right,
+              #6253e1,
+              #852d91,
+              #a3a1ff,
+              #f24645
+            );
+          box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
+        }
+        .bn30 {
+          border: 5em;
+          cursor: pointer;
+          outline: none;
+          font-size: 16px;
+          -webkit-transform: translate(0);
+          transform: translate(0);
+          background-image: linear-gradient(45deg, #4568dc, #b06ab3);
+          padding: 0.7em 2em;
+          border-radius: 65px;
+          box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438);
+          -webkit-transition: box-shadow 0.25s;
+          transition: box-shadow 0.25s;
+          color: white;
+        }
+
+        .bn30 .text {
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-image: linear-gradient(45deg, #4568dc, #b06ab3);
+        }
+
+        .bn30:after {
+          content: "";
+          border-radius: 18px;
+          position: absolute;
+          margin: 4px;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          z-index: -1;
+          background: #0e0e10;
+        }
+
+        .bn30:hover {
+          background-image: linear-gradient(-45deg, #4568dc, #b06ab3);
+          box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+        }
+
+        .bn30:hover .text {
+          background-image: linear-gradient(-45deg, #4568dc, #b06ab3);
+        }
+        #currency{
+            background-color: #6253e1;
+            color: white;
+        }
+        label{
+            border-bottom: 2px solid #564787;
+            border-left: 2px solid #564787;
+            padding: 5px;
+            color: rgb(199, 121, 250);
+            font-style: oblique;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tienda de Compras</h1>
+    <div class="currency-selector">
+        <label for="currency">Selecciona divisa: </label>
+        <select id="currency" onchange="updateCurrency()">
+            <option value="EUR">Euros (€)</option>
+            <option value="USD">Dólares ($)</option>
+            <option value="MXN">Pesos Mexicanos (MXN$)</option>
+        </select>
+    </div>
+    <div id="items">
+        <div class="item">
+            <h3>Artículo 1</h3>
+            <p>Precio: <span class="price" data-price="10">10</span> €</p>
+            <button class="bn30" onclick="addToCart(1, 10)">Comprar</button>
+        </div>
+        <div class="item">
+            <h3>Artículo 2</h3>
+            <p>Precio: <span class="price" data-price="15">15</span> €</p>
+            <button class="bn30" onclick="addToCart(2, 15)">Comprar</button>
+        </div>
+        <div class="item">
+            <h3>Artículo 3</h3>
+            <p>Precio: <span class="price" data-price="20">20</span> €</p>
+            <button class="bn30" onclick="addToCart(3, 20)">Comprar</button>
+        </div>
+        <div class="item">
+            <h3>Artículo 4</h3>
+            <p>Precio: <span class="price" data-price="25">25</span> €</p>
+            <button class="bn30" onclick="addToCart(4, 25)">Comprar</button>
+        </div>
+        <div class="item">
+            <h3>Artículo 5</h3>
+            <p>Precio: <span class="price" data-price="30">30</span> €</p>
+            <button class="bn30" onclick="addToCart(5, 30)">Comprar</button>
+        </div>
+        <div class="item">
+            <h3>Artículo 6</h3>
+            <p>Precio: <span class="price" data-price="35">35</span> €</p>
+            <button class="bn30" onclick="addToCart(6, 35)">Comprar</button>
+        </div>
+    </div>
+    <p id="total">Total: 0 €</p>
+    <button class="bn632-hover bn24" onclick="goToSummary()">Ir al resumen</button>
+    
+    <script>
+        let cart = {};
+        let currency = 'EUR';
+        const exchangeRates = {
+            USD: 1.1,
+            MXN: 24.0,
+            EUR: 1.0
+        };
+
+        function addToCart(itemId, price) {
+            if (!cart[itemId]) cart[itemId] = { quantity: 0, price: price };
+            if (cart[itemId].quantity < 3) {
+                cart[itemId].quantity++;
+                updateTotal();
+            } else {
+                alert('No puedes comprar más de 3 unidades de este artículo.');
+            }
+        }
+
+        function updateTotal() {
+            let total = 0;
+            for (const itemId in cart) {
+                total += cart[itemId].quantity * cart[itemId].price;
+            }
+            total *= exchangeRates[currency];
+            const currencySymbol = currency === 'EUR' ? '€' : currency === 'USD' ? '$' : 'MXN$';
+            document.getElementById('total').textContent = `Total: ${total.toFixed(2)} ${currencySymbol}`;
+        }
+
+        function updateCurrency() {
+            currency = document.getElementById('currency').value;
+            updateTotal();
+        }
+
+        function goToSummary() {
+            const summaryData = encodeURIComponent(JSON.stringify(cart));
+            window.location.href = `resumen.html?data=${summaryData}&currency=${currency}`;
+        }
+    </script>
+</body>
+</html>

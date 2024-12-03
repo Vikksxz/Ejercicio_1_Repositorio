@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Contador Eléctrico</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Simulador de Contador Eléctrico</h1>
+    </header>
+    <main>
+        <section id="add-appliance">
+            <h2>Añadir Electrodoméstico</h2>
+            <form id="appliance-form">
+                <label for="name">Nombre del Electrodoméstico:</label>
+                <input type="text" id="name" required>
+                
+                <label for="power">Potencia (W):</label>
+                <input type="number" id="power" required>
+
+                <label for="hours">Horas de uso diario:</label>
+                <input type="number" id="hours" required>
+
+                <button type="submit">Añadir</button>
+            </form>
+        </section>
+
+        <section id="appliance-list">
+            <h2>Lista de Electrodomésticos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Potencia (W)</th>
+                        <th>Horas</th>
+                        <th>Consumo Diario (kWh)</th>
+                    </tr>
+                </thead>
+                <tbody id="appliance-table-body">
+                    <!-- Aquí se añadirán las filas dinámicamente -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="total-cost">
+            <h2>Costo Diario Total</h2>
+            <p id="total-cost-display">Cargando precios...</p>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

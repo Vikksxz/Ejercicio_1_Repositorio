@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen del Pedido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #BBD5ED;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #AEA4BF;
+            border: 2px violet;
+            color: whitesmoke;
+        }
+        td{
+            background-color: #E3E4DB;
+        }
+        h1{
+            background-color: #A288E3;
+            border-radius: 10px;
+            height: 45px;
+            width: auto;
+            color: white;
+            text-align: center;
+            cursor: default;
+        }
+        #grand-total{
+            background-color: #ABFAA9;
+            width: 220px;
+            height: 70px;
+            font-size: 20px;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            border-radius: 15px;
+            border: 2px solid green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resumen del Pedido</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Artículo</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody id="summary-table">
+        </tbody>
+    </table>
+    <p id="grand-total"></p>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const cart = JSON.parse(decodeURIComponent(params.get('data')));
+        const currency = params.get('currency');
+        const exchangeRates = {
+            USD: 1.1,
+            MXN: 24.0,
+            EUR: 1.0
+        };
+        const currencySymbol = currency === 'EUR' ? '€' : currency === 'USD' ? '$' : 'MXN$';
+
+        function loadSummary() {
+            let grandTotal = 0;
+            const table = document.getElementById('summary-table');
+            for (const itemId in cart) {
+                const { quantity, price } = cart[itemId];
+                const total = quantity * price * exchangeRates[currency];
+                grandTotal += total;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>Artículo ${itemId}</td>
+                    <td>${quantity}</td>
+                    <td>${(price * exchangeRates[currency]).toFixed(2)} ${currencySymbol}</td>
+                    <td>${total.toFixed(2)} ${currencySymbol}</td>
+                `;
+                table.appendChild(row);
+            }
+            document.getElementById('grand-total').textContent = `Total General: ${grandTotal.toFixed(2)} ${currencySymbol}`;
+        }
+
+        loadSummary();
+    </script>
+</body>
+</html>
